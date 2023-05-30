@@ -5,6 +5,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, FloatField, TextAreaField
 from wtforms.validators import DataRequired, NumberRange
 from search_anime import search_anime, search_by_id
+import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
