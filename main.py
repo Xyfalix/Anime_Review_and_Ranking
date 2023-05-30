@@ -7,11 +7,11 @@ from wtforms.validators import DataRequired, NumberRange
 from search_anime import search_anime, search_by_id
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 Bootstrap(app)
 
 # Create Database
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///top10anime.db"
+app.config['SQLALCHEMY_DATABASE_URI'] =  os.environ.get("DATABASE_URL", "sqlite:///top10anime.db")
 db = SQLAlchemy(app)
 
 
