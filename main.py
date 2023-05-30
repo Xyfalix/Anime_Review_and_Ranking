@@ -49,11 +49,13 @@ with app.app_context():
 def home():
     # This creates a SQLAlchemy query object that selects all rows from the Anime table.
     query = db.session.query(Anime)
-    # This sorts the results of the query object in ascending order of the rating column and stores the sorted list of Anime objects in ordered_anime
+    # This sorts the results of the query object in ascending order of the rating column
+    # and stores the sorted list of Anime objects in ordered_anime
     ordered_anime = query.order_by(Anime.rating).all()
     # sets the initial rank to the length of the ordered_anime list
     rank = len(ordered_anime)
-    # loops through each Anime object in ordered_anime and sets its ranking attribute to the current rank value, then decrements the rank value by 1
+    # loops through each Anime object in ordered_anime and sets its ranking attribute to the current rank value,
+    # then decrements the rank value by 1
     for anime in ordered_anime:
         anime.ranking = rank
         rank -= 1
@@ -94,7 +96,7 @@ def delete(database_id):
 @app.route('/select/<int:anime_id>')
 def select_anime(anime_id):
     anime = search_by_id(anime_id)
-    #update the database with the new entry
+    # update the database with the new entry
     new_anime = Anime(
         title=anime['title']['romaji'],
         year=anime['startDate']['year'],
@@ -105,6 +107,7 @@ def select_anime(anime_id):
     db.session.commit()
     database_id = new_anime.id
     return redirect(url_for('edit_rating', database_id=database_id))
+
 
 if __name__ == '__main__':
     app.run(debug=True)
